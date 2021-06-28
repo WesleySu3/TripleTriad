@@ -10,11 +10,15 @@ public class HumanPlayer extends TriadPlayer {
 		return "Player " + number;
 	}
 
-	public Move decideMove(TriadBoard _b)
+	public Move decideMove(TriadBoard _b) {
 
-	// TODO
-	// After GUI is working,
-	// click on card, then slot
+		// TODO
+		// After GUI is working,
+		// click on card, then slot
+
+	}
+
+	
 
 	
 

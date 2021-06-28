@@ -4,4 +4,6 @@ abstract class TriadPlayer {
 
 	abstract Move decideMove(TriadBoard _b);
 
+	Card[] cards = new Card[5];
+
 }

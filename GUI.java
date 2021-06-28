@@ -1,7 +1,18 @@
 import java.awt.Color;
+import java.awt.Font;
 public abstract class GUI {
   public String title = "";
   public Color titleColor = StdDraw.BLACK;
+
+
+  // Fonts
+  Font heading = new Font("Papyrus", Font.ITALIC, 96);
+  Font papyrus16 = new Font("Papyrus", Font.BOLD, 16);
+  Font papyrus32 = new Font("Papyrus", Font.BOLD, 32);
+
+  // Colors
+  Color background = new Color(230, 165, 0);
+  Color button = new Color(139, 69, 19);
 
   // Available to subtypes
   public Box[] boxes;
@@ -29,7 +40,7 @@ public abstract class GUI {
         }
       }
     }
-    return 0;
+    return -1;
   }
 
   /*

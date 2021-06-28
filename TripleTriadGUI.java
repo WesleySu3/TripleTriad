@@ -21,9 +21,9 @@ public class TripleTriadGUI extends GUI {
 		| -----------------------  |
 		|   0 - 8    |    grid     |
 		|   9 - 13   |  P1 cards   |
-		|  14 - 18   |  P2 cards   |
-		|    19      | undo button |
-		|    20      | quit button |
+		|   14 - 18  |  P2 cards   |
+		|   19       | undo button |
+		|   20       | quit button |
 		***************************/
 
 		boxes = new Box[NUM_BOXES];
@@ -69,11 +69,14 @@ public class TripleTriadGUI extends GUI {
 
         StdDraw.setPenColor(StdDraw.BLACK);
         for (int i = 0; i < NUM_BOXES; i++) {
-        	System.out.println("Boxcode " + i
-        		+ ": " + boxes[i].x0
-        		+ " " + boxes[i].y0
-        		+ " " + boxes[i].x1
-        		+ " " + boxes[i].y1);
+        	// ***********************************
+        	// Output the coordinates of the boxes for testing
+        	
+        	// System.out.println("Boxcode " + i
+        	// 	+ ": " + boxes[i].x0
+        	// 	+ " " + boxes[i].y0
+        	// 	+ " " + boxes[i].x1
+        	// 	+ " " + boxes[i].y1);
         	StdDraw.rectangle(
         		(boxes[i].x0+boxes[i].x1)/2,
         		(boxes[i].y0+boxes[i].y1)/2,

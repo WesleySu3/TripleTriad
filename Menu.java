@@ -1,0 +1,8 @@
+public enum Menu {
+	MAIN,
+	SETTINGS,
+	RULES,
+	PLAYER_SELECT,
+	DECKS,
+	PLAY
+}
