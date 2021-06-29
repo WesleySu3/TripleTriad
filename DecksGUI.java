@@ -1,7 +1,7 @@
 public class DecksGUI extends GUI {
 
 	public DecksGUI(Card[] _p1Cards,
-						Card[] _p2Cards) {
+					Card[] _p2Cards) {
 
 		/*****************************
 		|   index    |     box       |
@@ -14,9 +14,7 @@ public class DecksGUI extends GUI {
 
 		boxes = new Box[12];
 
-		for (int i = 0; i < 5; i++) {
-			boxes[i] = new Box(i+1, 3, i+2 , 4, i);
-		}
+		
 
 	}
 
