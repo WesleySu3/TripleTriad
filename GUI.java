@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+
 public abstract class GUI {
   public String title = "";
   public Color titleColor = StdDraw.BLACK;
@@ -26,7 +27,7 @@ public abstract class GUI {
   }
 
   /*
-   * This something that the main game should call
+   * This is something that the main game should call
    * Returns 0 if no valid move has been made.
    * Returns an integer representing the move if one has been made
    * This should work for any type of GUI -> the code gets written here.
@@ -46,12 +47,11 @@ public abstract class GUI {
     return -1;
   }
 
-  /*
-   * display output to the screen
-   */
+
+  // Display output to the screen
   abstract void draw();
 
-  //Available to subtypes
+  // Available to subtypes
   public class Box{
     public double x0,y0,x1,y1;
     public int boxcode;
@@ -64,9 +64,30 @@ public abstract class GUI {
       this.boxcode = boxcode;
     }
 
-    /*
-     * Return true if this Box contains this point
-     */
+    public void display(Font _font, String _text, Color _boxColor,
+                   Color _boundaryColor, Color _textColor,
+                   double x0, double y0,
+                   double x1, double y1) {
+
+      // Draw box background
+      StdDraw.setPenColor(_boxColor);
+      StdDraw.filledRectangle((x1+x0)/2, (y1+y0)/2,
+      (x1-x0)/2, (y1-y0)/2);
+
+      // Draw box boundary
+      StdDraw.setPenColor(_boundaryColor);
+      StdDraw.rectangle((x1+x0)/2, (y1+y0)/2,
+      (x1-x0)/2, (y1-y0)/2);
+
+      // Draw box text
+      StdDraw.setFont(_font);
+      StdDraw.setPenColor(_textColor);
+      StdDraw.text((x1+x0)/2, (y1+y0)/2 + .05, _text);
+
+    }
+
+
+    // Returns true if this Box contains this point
     public boolean contains(double x, double y) {
       return(x0 < x && x < x1 && y0 < y && y < y1);
     }

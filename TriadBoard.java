@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class TriadBoard {
 
 	Random rnd = new Random();
+	static Element[] elements = Element.values();
 
 	// ****************************
 	// Gameplay Bookkeeping Variables
@@ -34,14 +35,18 @@ public class TriadBoard {
 	// Decks
 	Card[] p1Deck = new Card[5];
 	Card[] p2Deck = new Card[5];
-	int playerChosen; // Used in deck config menu
+
+	// Used in deck config menus
+	int playerChosen; 
 	int cardChosen;
-	int elementTest;
+	Card curCard = new Card();
+
+	
 
 
 	// ****************************
-	// Board elements
-	Slot[][] board = new Slot[3][3]; // The board
+	// The board
+	Slot[][] board = new Slot[3][3];
 
 	// Board Indexing
 	/*-----------------------
@@ -65,20 +70,10 @@ public class TriadBoard {
 	// 2. TBD
 	public TriadBoard() {
 		for (int i = 0; i < 5; i++) {
-			p1Deck[i] = new Card();
-				elementTest = rnd.nextInt(4);
-			if (elementTest == 0) {
-				p1Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
-			} else {
-				p1Deck[i].element = Element.CARDNULL;
-			}
-			
-			p2Deck[i] = new Card();
-			if (elementTest == 0) {
-				p2Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
-			} else {
-				p2Deck[i].element = Element.CARDNULL;
-			}
+			Card c1 = new Card();
+			Card c2 = new Card();
+			p1Deck[i] = c1;
+			p2Deck[i] = c2;
 		}
 
 	}
@@ -131,7 +126,35 @@ public class TriadBoard {
 		}
 	}
 
+	public static String getElementName(Element _elem) {
+		switch (_elem) {
+			case EARTH:
+				return "Earth";
+			case FIRE:
+				return "Fire";
+			case WATER:
+				return "Water";
+			case POISON:
+				return "Poison";
+			case HOLY:
+				return "Holy";
+			case LIGHTNING:
+				return "Elec";
+			case WIND:
+				return "Wind";
+			case ICE:
+				return "Ice";
+			case NORMAL:
+				return "Normal";
+			case SLOTNULL:
+				return "";
+		}
+		return "";
+	}
 
+	public static Element getElement(int _id) {
+		return elements[_id];
+	}
 
 
 

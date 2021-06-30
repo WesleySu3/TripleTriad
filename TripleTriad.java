@@ -26,6 +26,12 @@ public class TripleTriad {
 		int choosePlayers;
 		DecksGUI decksGUI = new DecksGUI();
 		int decks;
+		CardGUI cardGUI = new CardGUI();
+		int card = -1;
+		NumberGUI numberGUI = new NumberGUI();
+		int number;
+		ElementGUI elementGUI = new ElementGUI();
+		int elementG;
 
 
 
@@ -49,7 +55,6 @@ public class TripleTriad {
 					while (mainMenu < 0) {
 						mainMenu = mainMenuGUI.getMove();
 					}
-					System.out.println(curMenu + " " + mainMenu);
 					switch (mainMenu) {
 						case 0:
 							curMenu = Menu.PLAY;
@@ -76,7 +81,6 @@ public class TripleTriad {
 					while (settings < 0) {
 						settings = settingsGUI.getMove();
 					}
-					System.out.println(curMenu + " " + settings);
 					switch (settings) {
 						case 0:
 							curMenu = Menu.RULES;
@@ -97,8 +101,6 @@ public class TripleTriad {
 				// *****************************
 				// Rules Menu
 				case RULES:
-
-					
 					do {
 						rules = -1;
 						rulesGUI.draw(gameBoard.open,
@@ -112,7 +114,6 @@ public class TripleTriad {
 						while (rules < 0) {
 							rules = rulesGUI.getMove();
 						}
-						System.out.println(curMenu + " " + rules);
 
 						switch(rules) {
 							case 0:
@@ -195,27 +196,85 @@ public class TripleTriad {
 						while (decks < 0) {
 							decks = decksGUI.getMove();
 						}
-						if (decks == 10) {
-							gameBoard.randomizeDecks();
-						} else if (decks == 11) {
-							curMenu = Menu.SETTINGS;
-						} else {
-							gameBoard.playerChosen = decks / 5;
-							gameBoard.cardChosen = decks % 5;
-							curMenu = Menu.CARD;
+						switch(decks) {
+							case 10:
+								gameBoard.randomizeDecks();
+								break;
+							case 11:
+								curMenu = Menu.SETTINGS;
+								break;
+							default:
+								gameBoard.playerChosen = decks / 5;
+								gameBoard.cardChosen = decks % 5;
+								if (gameBoard.playerChosen == 0) {
+									gameBoard.curCard = gameBoard.p1Deck[gameBoard.cardChosen];
+								} else {
+									gameBoard.curCard = gameBoard.p2Deck[gameBoard.cardChosen];
+								}
+								curMenu = Menu.CARD;
+								break;
 						}
-						
-					} while (decks < 11);
-					curMenu = Menu.SETTINGS;
+					} while (decks == 10);
 					break; // Repeat Master Loop
+
+				// *****************************
+				// Modify-Card Menu
 				case CARD:
-					System.out.println("Card Menu");
+
+					card = -1;
+					cardGUI.draw(gameBoard.curCard);
+
+					while (card < 0) {
+						card = cardGUI.getMove();
+					}
+
+					if (0 <= card && card <= 3) {
+						curMenu = Menu.CARD_VALUE;
+						break;
+					} else if (card == 4) {
+						curMenu = Menu.CARD_ELEMENT;
+						break;
+					} else if (card == 5) {
+						curMenu = Menu.DECKS;
+						break;
+					}
 					break;
+				// *****************************
+				// Modify Card(numbers) Menu
 				case CARD_VALUE:
-					System.out.println("Card Value Menu");
+					number = -1;
+					numberGUI.draw(gameBoard.curCard, card);
+					while (number < 0) {
+						number = numberGUI.getMove();
+					}
+					// "card" will be in range [0,3]
+					// representing top, left, right,
+					// or bottom. This value comes
+					// from the CardGUI above.
+					switch (card) {
+						case 0:
+							gameBoard.curCard.top = number+1;
+							break;
+						case 1:
+							gameBoard.curCard.left = number+1;
+							break;
+						case 2:
+							gameBoard.curCard.right = number+1;
+							break;
+						case 3:
+							gameBoard.curCard.bottom = number+1;
+							break;
+					}
+					curMenu = Menu.CARD;
 					break;
 				case CARD_ELEMENT:
-					System.out.println("Card Element Menu");
+					elementG = -1;
+					elementGUI.draw(gameBoard.curCard, card);
+					while (elementG < 0) {
+						elementG = elementGUI.getMove();
+					}
+					gameBoard.curCard.element = TriadBoard.getElement(elementG);
+					curMenu = Menu.CARD;
 					break;
 				case PLAY:
 					System.out.println("Play Menu");

@@ -21,7 +21,7 @@ public class Card {
 	// Coordinates on the
 	// playing board.
 	// Default (-1, -1)
-	Coordinates cx = new Coordinates();
+	Coordinates cx;
 
 	// 1 or 2, the player who
 	// currently owns the card
@@ -35,10 +35,15 @@ public class Card {
 		left = rnd.nextInt(10) + 1;
 		right = rnd.nextInt(10) + 1;
 		bottom = rnd.nextInt(10) + 1;
-		elementTest = rnd.nextInt(3);
+		elementTest = rnd.nextInt(4);
 		if (elementTest == 0) {
 			element = elements[rnd.nextInt(elements.length - 2)];
+		} else {
+			element = Element.NORMAL;
 		}
+
+		Coordinates xy = new Coordinates();
+		cx = xy;
 	}
 
 	// Randomizes the numbers and element of
@@ -51,14 +56,14 @@ public class Card {
 		if (elementTest == 0) {
 			element = elements[rnd.nextInt(elements.length - 2)];
 		} else {
-			element = Element.CARDNULL;
+			element = Element.NORMAL;
 		}
 		
 	}
 
 	// Displays a card within the given
 	// font, colors, and coordinates
-	public void display(Font _font, Color _cardColor,
+	public void display(Font _font, int _highlight, Color _cardColor,
 						Color _boundaryColor, Color _textColor,
 						double x0, double y0,
 						double x1, double y1) {
@@ -79,50 +84,40 @@ public class Card {
 		StdDraw.setFont(_font);
 		StdDraw.setPenColor(_textColor);
 
+
+		if (_highlight == 0) {
+			StdDraw.setPenColor(StdDraw.RED);
+		}
 		StdDraw.text((x1+x0)/2, ((y1+y0)/2)+(.35*(y1-y0)) + .05,
 			top == 10 ? "A" : String.valueOf(top));
+		StdDraw.setPenColor(_textColor);
 
+		if (_highlight == 1) {
+			StdDraw.setPenColor(StdDraw.RED);
+		}
 		StdDraw.text(((x1+x0)/2)-(.35*(x1-x0)), (y1+y0)/2 + .05,
 			left == 10 ? "A" : String.valueOf(left));
+		StdDraw.setPenColor(_textColor);
 
+		if (_highlight == 2) {
+			StdDraw.setPenColor(StdDraw.RED);
+		}
 		StdDraw.text(((x1+x0)/2)+(.35*(x1-x0)), (y1+y0)/2 + .05,
 			right == 10 ? "A" : String.valueOf(right));
+		StdDraw.setPenColor(_textColor);
 
+		if (_highlight == 3) {
+			StdDraw.setPenColor(StdDraw.RED);
+		}
 		StdDraw.text((x1+x0)/2, ((y1+y0)/2)-(.35*(y1-y0)) + .05,
 			bottom == 10 ? "A" : String.valueOf(bottom));
+		StdDraw.setPenColor(_textColor);
 
 		// Draw card element
-		String elem = "";
-		switch (element) {
-			case EARTH:
-				elem = "Earth";
-				break;
-			case FIRE:
-				elem = "Fire";
-				break;
-			case WATER:
-				elem = "Water";
-				break;
-			case POISON:
-				elem = "Poison";
-				break;
-			case HOLY:
-				elem = "Holy";
-				break;
-			case LIGHTNING:
-				elem = "Elec";
-				break;
-			case WIND:
-				elem = "Wind";
-				break;
-			case ICE:
-				elem = "Ice";
-				break;
-			case CARDNULL:
-				elem = "Normal";
-				break;
+		if (_highlight == 4) {
+			StdDraw.setPenColor(StdDraw.RED);
 		}
-
+		String elem = TriadBoard.getElementName(element);
 		StdDraw.text((x1+x0)/2, (y1+y0)/2 + .05, elem);
 
 	}

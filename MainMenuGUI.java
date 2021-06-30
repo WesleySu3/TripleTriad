@@ -29,7 +29,7 @@ public class MainMenuGUI extends GUI {
 
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.setFont(heading);
-		StdDraw.text(5, 6.25, "Triple Triad");
+		StdDraw.text(5, 5.75, "Triple Triad");
 
 		StdDraw.setPenColor(button);
 		StdDraw.filledRectangle(5, 3.5, 2, 0.4);

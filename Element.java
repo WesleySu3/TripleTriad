@@ -7,6 +7,6 @@ public enum Element {
 	LIGHTNING,
 	WIND,
 	ICE,
+	NORMAL,
 	SLOTNULL,
-	CARDNULL,
 }

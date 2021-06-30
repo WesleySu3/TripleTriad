@@ -22,7 +22,7 @@ public class SettingsGUI extends GUI {
 
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.setFont(heading);
-		StdDraw.text(5, 6.75, "Settings");
+		StdDraw.text(5, 6, "Settings");
 
 		StdDraw.setPenColor(button);
 		StdDraw.filledRectangle(5, 4, 2, 0.4);

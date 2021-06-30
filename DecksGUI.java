@@ -24,7 +24,7 @@ public class DecksGUI extends GUI {
 		}
 
 		// Randomize button
-		boxes[10] = new Box(4, 2.5, 5.5, 3.5, 10);
+		boxes[10] = new Box(4.25, 2.5, 5.75, 3.5, 10);
 
 		// Back button
 		boxes[11] = new Box(0, 6.5, 1, 7, 11);
@@ -48,7 +48,7 @@ public class DecksGUI extends GUI {
 
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.setFont(heading);
-		StdDraw.text(5, 6.5, "Player Select");
+		StdDraw.text(5, 6.25, "Modify Decks");
 
 		StdDraw.setFont(papyrus48);
 		StdDraw.setPenColor(StdDraw.BLACK);
@@ -56,10 +56,10 @@ public class DecksGUI extends GUI {
 		StdDraw.text(1.25, 1.55, "Player 2");
 
 		for (int i = 0; i < 5; i++) {
-			_p1Deck[i].display(papyrus24,
+			_p1Deck[i].display(papyrus24, 5,
 				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK,
 				i+2.5, 4, i+3.5, 5);
-			_p2Deck[i].display(papyrus24,
+			_p2Deck[i].display(papyrus24, 5,
 				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK,
 				i+2.5, 1, i+3.5, 2);
 		}
@@ -68,9 +68,9 @@ public class DecksGUI extends GUI {
 
 		// Randomize button
 		StdDraw.setPenColor(button);
-		StdDraw.filledRectangle(4.75, 3, 0.75, 0.5);
+		StdDraw.filledRectangle(5, 3, 0.75, 0.5);
 		StdDraw.setPenColor(StdDraw.BLACK);
-		StdDraw.text(4.75, 3.05, "Randomize");
+		StdDraw.text(5, 3.05, "Randomize");
 
 
 		// Back Button

@@ -43,7 +43,7 @@ public class ChoosePlayersGUI extends GUI {
 
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.setFont(heading);
-		StdDraw.text(5, 6.5, "Player Select");
+		StdDraw.text(5, 6.25, "Player Select");
 
 		// P1 Toggles
 

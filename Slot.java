@@ -31,7 +31,7 @@ public class Slot {
 		if (elementTest == 0) {
 			element = elements[rnd.nextInt(elements.length - 2)];
 		} else {
-			element = Element.CARDNULL;
+			element = Element.NORMAL;
 		}
 	}
 }
