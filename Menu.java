@@ -4,5 +4,8 @@ public enum Menu {
 	RULES,
 	PLAYER_SELECT,
 	DECKS,
+	CARD,
+	CARD_VALUE,
+	CARD_ELEMENT,
 	PLAY
 }

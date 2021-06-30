@@ -1,7 +1,9 @@
+import java.util.Random;
 import java.util.ArrayList;
 
 public class TriadBoard {
 
+	Random rnd = new Random();
 
 	// ****************************
 	// Bookkeeping
@@ -14,9 +16,8 @@ public class TriadBoard {
 	// Configuration Variables
 
 	// Player types
-
 	PlayerType p1Type = PlayerType.HUMAN; // default
-	PlayerType p2Type = PlayerType.HUMAN; // default
+	PlayerType p2Type = PlayerType.MEDIUM; // default
 	
 	// Rules
 	boolean open = true; // This implementation will
@@ -30,19 +31,44 @@ public class TriadBoard {
 	boolean sameWall = false;
 	boolean suddenDeath = false;
 
+	// Decks
+	Card[] p1Deck = new Card[5];
+	Card[] p2Deck = new Card[5];
+	int playerChosen; // Used in deck config menu
+	int cardChosen;
+
 
 	// ****************************
 	// Board elements
 	Slot[][] board = new Slot[3][3]; // The board
-	Card[][] cards = new Card[3][3]; // Cards placed in slots
+
+	// Board Indexing
+	/*-----------------------
+	| (0,2) | (1,2) | (2,2) |
+	|-------|-------|-------|
+	| (0,1) | (1,1) | (2,1) |
+	|-------|-------|-------|
+	| (0,0) | (1,0) | (2,0) |
+	|----------------------*/
+	
 
 
 	// ****************************
-	// Board Methods
+	// Constructor
 
 	public TriadBoard() {
+		for (int i = 0; i < 5; i++) {
+			p1Deck[i] = new Card();
+			p1Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+			p2Deck[i] = new Card();
+			p2Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+		}
 
 	}
+
+
+	// ****************************
+	// Gameplay Methods
 
 	public boolean isValidMove(Card _c, Coordinates _cx) {
 		boolean valid = true;
@@ -57,11 +83,6 @@ public class TriadBoard {
 			return false;
 		return true;
 	}
-
-	public Card getCard(Coordinates _cx) {
-		return cards[_cx.x][_cx.y];
-	}
-
 
 	public boolean makeMove(Card _c, Coordinates _cx) {
 		if (!isValidMove(_c, _cx)) {
@@ -82,6 +103,18 @@ public class TriadBoard {
 		return true;
 
 	}
+
+	// ****************************
+	// Configuration methods
+
+	public void randomizeDecks() {
+		for (int i = 0; i < 5; i++) {
+			p1Deck[i].randomize();
+			p2Deck[i].randomize();
+		}
+	}
+
+
 
 
 

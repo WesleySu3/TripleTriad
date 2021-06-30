@@ -1,3 +1,8 @@
+// A class that stores
+// an x and y value
+// for easy function returns
+
+
 public class Coordinates {
 
 	int x;

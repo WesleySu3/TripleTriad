@@ -8,11 +8,14 @@ public abstract class GUI {
   // Fonts
   Font heading = new Font("Papyrus", Font.ITALIC, 96);
   Font papyrus16 = new Font("Papyrus", Font.BOLD, 16);
+  Font papyrus24 = new Font("Papyrus", Font.BOLD, 24);
   Font papyrus32 = new Font("Papyrus", Font.BOLD, 32);
+  Font papyrus48 = new Font("Papyrus", Font.BOLD, 48);
 
   // Colors
   Color background = new Color(230, 165, 0);
   Color button = new Color(139, 69, 19);
+  Color selected = new Color(210, 105, 30);
 
   // Available to subtypes
   public Box[] boxes;

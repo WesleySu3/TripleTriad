@@ -1,6 +1,4 @@
 public enum Element {
-	SLOTNULL,
-	CARDNULL,
 	EARTH,
 	FIRE,
 	WATER,
@@ -8,5 +6,7 @@ public enum Element {
 	HOLY,
 	LIGHTNING,
 	WIND,
-	ICE
+	ICE,
+	SLOTNULL,
+	CARDNULL,
 }
