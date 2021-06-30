@@ -6,7 +6,7 @@ public class TriadBoard {
 	Random rnd = new Random();
 
 	// ****************************
-	// Bookkeeping
+	// Gameplay Bookkeeping Variables
 
 	int turn = 1; // Whose turn it is (1 or 2)
 	int totTurns = 0; // Game ends at 9
@@ -36,6 +36,7 @@ public class TriadBoard {
 	Card[] p2Deck = new Card[5];
 	int playerChosen; // Used in deck config menu
 	int cardChosen;
+	int elementTest;
 
 
 	// ****************************
@@ -56,12 +57,28 @@ public class TriadBoard {
 	// ****************************
 	// Constructor
 
+	// Constructor tasks:
+	//
+	// 1. Fill out both decks with
+	//    randomized cards
+	//
+	// 2. TBD
 	public TriadBoard() {
 		for (int i = 0; i < 5; i++) {
 			p1Deck[i] = new Card();
-			p1Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+				elementTest = rnd.nextInt(4);
+			if (elementTest == 0) {
+				p1Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+			} else {
+				p1Deck[i].element = Element.CARDNULL;
+			}
+			
 			p2Deck[i] = new Card();
-			p2Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+			if (elementTest == 0) {
+				p2Deck[i].element = Card.elements[rnd.nextInt(Card.elements.length - 2)];
+			} else {
+				p2Deck[i].element = Element.CARDNULL;
+			}
 		}
 
 	}

@@ -23,13 +23,15 @@ public class Slot {
 		hasCard = false;
 	}
 
-	// Has a 1/3 probability of
+	// Has a 1/4 probability of
 	// assigning a random element
 	// to the Slot
 	public void addRandElement() {
-		elementTest = rnd.nextInt(3);
+		elementTest = rnd.nextInt(4);
 		if (elementTest == 0) {
 			element = elements[rnd.nextInt(elements.length - 2)];
+		} else {
+			element = Element.CARDNULL;
 		}
 	}
 }
