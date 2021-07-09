@@ -17,6 +17,8 @@ public abstract class GUI {
   Color background = new Color(230, 165, 0);
   Color button = new Color(139, 69, 19);
   Color selected = new Color(210, 105, 30);
+  Color cardRed = new Color(240, 128, 128);
+  Color cardBlue = new Color(0, 191, 255);
 
   // Available to subtypes
   public Box[] boxes;
@@ -65,9 +67,7 @@ public abstract class GUI {
     }
 
     public void display(Font _font, String _text, Color _boxColor,
-                   Color _boundaryColor, Color _textColor,
-                   double x0, double y0,
-                   double x1, double y1) {
+                   Color _boundaryColor, Color _textColor) {
 
       // Draw box background
       StdDraw.setPenColor(_boxColor);
@@ -82,7 +82,7 @@ public abstract class GUI {
       // Draw box text
       StdDraw.setFont(_font);
       StdDraw.setPenColor(_textColor);
-      StdDraw.text((x1+x0)/2, (y1+y0)/2 + .05, _text);
+      StdDraw.text((x1+x0)/2, (y1+y0)/2 + .1, _text);
 
     }
 

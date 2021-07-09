@@ -267,6 +267,8 @@ public class TripleTriad {
 					}
 					curMenu = Menu.CARD;
 					break;
+				// *****************************
+				// Modify Card(element) Menu
 				case CARD_ELEMENT:
 					elementG = -1;
 					elementGUI.draw(gameBoard.curCard, card);
@@ -278,13 +280,59 @@ public class TripleTriad {
 					break;
 				case PLAY:
 					System.out.println("Play Menu");
-					// curMenu = Menu.PLAY;
 					break; // Repeat Master Loop
 			}
 		}
 
+		if (gameBoard.p1Type == PlayerType.HUMAN) {
+			players[0] = new HumanPlayer(1, tripleTriadGUI);
+		} else if (gameBoard.p1Type == PlayerType.EASY) {
+			players[0] = new LookAheadPlayer(1, 2);
+		} else if (gameBoard.p1Type == PlayerType.MEDIUM) {
+			players[0] = new LookAheadPlayer(1, 4);
+		} else if (gameBoard.p1Type == PlayerType.HARD) {
+			players[0] = new LookAheadPlayer(1, 8);
+		}
+
+		if (gameBoard.p2Type == PlayerType.HUMAN) {
+			players[1] = new HumanPlayer(2, tripleTriadGUI);
+		} else if (gameBoard.p2Type == PlayerType.EASY) {
+			players[1] = new LookAheadPlayer(2, 2);
+		} else if (gameBoard.p2Type == PlayerType.MEDIUM) {
+			players[1] = new LookAheadPlayer(2, 4);
+		} else if (gameBoard.p2Type == PlayerType.HARD) {
+			players[1] = new LookAheadPlayer(2, 8);
+		}
 
 		tripleTriadGUI.draw(gameBoard, players[0]);
+
+		int winner = play(gameBoard, tripleTriadGUI, players);
+
+
+	}
+
+	public static int play(TriadBoard _b, TripleTriadGUI _g,
+		TriadPlayer[] _players) {
+
+		do {
+			_g.draw(_b, _players[_b.nextTurn()-1]);
+
+		} while (_b.isWinning() == 0);
+
+		if (_b.isWinning() == 3) {
+			return 3;
+		} else {
+			return 3 - _b.nextTurn();
+		}
+
+
+
+
+
+
+
+
+
 
 
 

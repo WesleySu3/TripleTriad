@@ -27,6 +27,10 @@ public class Card {
 	// currently owns the card
 	int player;
 
+	// Whether the card has been
+	// placed on the board
+	boolean played = false;
+
 
 	// Default Card Constructor
 	// sets coordinates (-1,-1).

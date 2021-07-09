@@ -48,15 +48,12 @@ public class NumberGUI extends GUI {
 
 		for (int i = 0; i < 9; i++) {
 			boxes[i].display(papyrus24, String.valueOf(i+1),
-				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK,
-				(i%2) + 6, 5 - (i/2),
-				(i%2) + 7, 6 - (i/2));
+				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK);
 		}
 		// Last box is done seperately because
 		// 10 is represented with an A
 		boxes[9].display(papyrus24, "A",
-				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK,
-				7, 1, 8, 2);
+				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK);
 
 		StdDraw.show();
 

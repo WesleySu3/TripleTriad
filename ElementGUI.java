@@ -48,9 +48,7 @@ public class ElementGUI extends GUI {
 		for (int i = 0; i < 9; i++) {
 			boxes[i].display(papyrus24,
 				TriadBoard.getElementName(TriadBoard.getElement(i)),
-				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK,
-				(i%3) + 5.5, 4 - (i/3),
-				(i%3) + 6.5, 5 - (i/3));
+				StdDraw.LIGHT_GRAY, StdDraw.BLACK, StdDraw.BLACK);
 		}
 
 

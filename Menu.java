@@ -1,4 +1,7 @@
 public enum Menu {
+
+
+	// Config Menus
 	MAIN,
 	SETTINGS,
 	RULES,
@@ -7,5 +10,10 @@ public enum Menu {
 	CARD,
 	CARD_VALUE,
 	CARD_ELEMENT,
+
+
+	// Play Menus
 	PLAY
+
+	
 }
