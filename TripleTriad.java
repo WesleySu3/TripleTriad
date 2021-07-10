@@ -311,19 +311,27 @@ public class TripleTriad {
 
 	}
 
+	// Returns 0 if the game is a draw,
+	// returns 1 or 2 if player 1 or 2 won.
 	public static int play(TriadBoard _b, TripleTriadGUI _g,
 		TriadPlayer[] _players) {
 
+		Move curMove;
 		do {
+			StdDraw.clear();
 			_g.draw(_b, _players[_b.nextTurn()-1]);
+			StdDraw.show();
+			while (true) {
+				curMove = _players[_b.nextTurn()-1].decideMove(_b);
+				_b.makeMove(curMove.card, curMove.cx);
+				break;
+			}
 
-		} while (_b.isWinning() == 0);
 
-		if (_b.isWinning() == 3) {
-			return 3;
-		} else {
-			return 3 - _b.nextTurn();
-		}
+
+		} while (_b.isWinning() == 3);
+
+		return _b.isWinning();
 
 
 

@@ -3,7 +3,6 @@ public class Move {
 	Coordinates cx;
 
 
-	// Deprecated constructor
 	public Move() {
 
 	}

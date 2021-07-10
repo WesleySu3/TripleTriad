@@ -21,9 +21,6 @@ public class LookAheadPlayer extends TriadPlayer {
 
     	Move mv = new Move();
 		return mv;
-		// TODO
-		// After GUI is working,
-		// click on card, then slot
 
 	}
 

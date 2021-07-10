@@ -9,9 +9,9 @@ public class TriadBoard {
 	// ****************************
 	// Gameplay Bookkeeping Variables
 
-	int turn = 1; // Whose turn it is (1 or 2)
+	int curPlayer = 1; // Whose turn it is (1 or 2)
 	int totTurns = 0; // Game ends at 9
-	ArrayList<Integer> historyCX = new ArrayList<Integer>();
+	ArrayList<Coordinates> history = new ArrayList<Coordinates>();
 
 	// ****************************
 	// Configuration Variables
@@ -90,36 +90,97 @@ public class TriadBoard {
 	// Gameplay Methods
 
 	public boolean isValidMove(Card _c, Coordinates _cx) {
-		boolean valid = true;
+
 
 		// If the slot is already taken
 		// or the card has already been played,
 		// return false
-		if (board[_cx.x][_cx.y].hasCard) {
-			return false;
-		}
-		if (_c.cx.x != -1)
-			return false;
-		return true;
+		return (!(board[_cx.x][_cx.y].hasCard || _c.played));
+		
 	}
 
 	public boolean makeMove(Card _c, Coordinates _cx) {
 		if (!isValidMove(_c, _cx)) {
 			return false;
 		}
+		history.add(_cx);
 
-		/****************************
-		TODO
-		
-		1. Put card on board
-		2. Check
-			A. Element
-			B. Same/SameWall/Plus
-			C. Direct Wins
-		3. Flips (update history)
-		****************************/
+		// 1. Put card on board
+		board[_cx.x][_cx.y].card = _c;
+		board[_cx.x][_cx.y].hasCard = true;
 
+		_c.player = curPlayer;
+		_c.played = true;
+		_c.cx = _cx;
+
+		// 2. TODO
+		// Check Element, Plus/Same
+
+		// 3. Flips
+		if (_cx.x > 0 && board[_cx.x-1][_cx.y].hasCard) {
+			if (_c.left > board[_cx.x-1][_cx.y].card.right) {
+				board[_cx.x-1][_cx.y].card.player = curPlayer;
+			}
+		}
+
+		if (_cx.x < 2 && board[_cx.x+1][_cx.y].hasCard) {
+			if (_c.right > board[_cx.x+1][_cx.y].card.left) {
+				board[_cx.x+1][_cx.y].card.player = curPlayer;
+			}
+		}
+
+		if (_cx.y > 0 && board[_cx.x][_cx.y-1].hasCard) {
+			if (_c.bottom > board[_cx.x][_cx.y-1].card.top) {
+				board[_cx.x][_cx.y-1].card.player = curPlayer;
+			}
+		}
+
+		if (_cx.y < 2 && board[_cx.x][_cx.y+1].hasCard) {
+			if (_c.top > board[_cx.x][_cx.y+1].card.bottom) {
+				board[_cx.x][_cx.y+1].card.player = curPlayer;
+			}
+		}
+
+		totTurns++;
+		curPlayer = 3 - curPlayer;
 		return true;
+
+	}
+
+	public int numTotalMoves() {
+    	return history.size();
+	}
+
+	public int nextTurn() {
+    	return (((history.size() % 2) == 0) ? 1 : 2);
+	}
+
+	// Returns 0 if the game ended in a draw
+	// Returns 1 or 2 if player 1 or 2 won,
+	// Returns 3 if the game is not over,
+	// Returns -1 as default, should never occur.
+	public int isWinning() {
+		if (history.size() < 9) {
+			return 3;
+		}
+
+		int numP1cards = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (board[i][j].card.player == 1) {
+					numP1cards++;
+				}
+			}
+		}
+		if (numP1cards >= 6) {
+			return 1;
+		} else if (numP1cards == 5) {
+			return 0;
+		} else if (numP1cards <= 4) {
+			return 2;
+		}
+
+		return -1;
 
 	}
 
@@ -163,38 +224,7 @@ public class TriadBoard {
 		return elements[_id];
 	}
 
-	public int nextTurn() {
-    	return (((historyCX.size() % 2) == 0) ? 1 : 2);
-	}
 
-	// Returns 0 if the game ended in a draw
-	// Returns 1 or 2 if player 1 or 2 won,
-	// Returns 3 if the game is not over,
-	// Returns -1 as default, should never occur.
-	public int isWinning() {
-		if (historyCX.size() < 9) {
-			return 3;
-		}
-
-		int numP1cards = 0;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (board[i][j].card.player == 1) {
-					numP1cards++;
-				}
-			}
-		}
-		if (numP1cards >= 6) {
-			return 1;
-		} else if (numP1cards == 5) {
-			return 0;
-		} else if (numP1cards <= 4) {
-			return 2;
-		}
-
-		return -1;
-
-	}
 
 
 }

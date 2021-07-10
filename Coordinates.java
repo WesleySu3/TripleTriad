@@ -17,4 +17,7 @@ public class Coordinates {
 		x = _x;
 		y = _y;
 	}
+
+
+
 }
