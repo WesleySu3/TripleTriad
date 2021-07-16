@@ -1,14 +1,14 @@
 public class Move {
 	Card card;
-	Coordinates cx;
+	int slot;
 
 
 	public Move() {
 
 	}
 
-	public Move(Card _c, Coordinates _cx) {
+	public Move(Card _c, int _slot) {
 		card = _c;
-		cx = _cx;
+		slot = _slot;
 	}
 }

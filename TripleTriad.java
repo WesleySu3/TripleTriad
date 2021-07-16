@@ -323,7 +323,7 @@ public class TripleTriad {
 			StdDraw.show();
 			while (true) {
 				curMove = _players[_b.nextTurn()-1].decideMove(_b);
-				_b.makeMove(curMove.card, curMove.cx);
+				_b.makeMove(curMove.card, curMove.slot);
 				break;
 			}
 

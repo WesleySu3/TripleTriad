@@ -103,14 +103,12 @@ public class TripleTriadGUI extends GUI {
 				StdDraw.BLACK, StdDraw.BLACK);
 		}
 
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				_board.board[i][j].display(
-					boxes[(i*3)+j].x0,
-					boxes[(i*3)+j].y0,
-					boxes[(i*3)+j].x1,
-					boxes[(i*3)+j].y1);
-			}
+		for (int i = 0; i < 9; i++) {
+			_board.board[i].display(
+				boxes[i].x0,
+				boxes[i].y0,
+				boxes[i].x1,
+				boxes[i].y1);
 		}
 
 

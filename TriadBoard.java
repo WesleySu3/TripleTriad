@@ -11,7 +11,7 @@ public class TriadBoard {
 
 	int curPlayer = 1; // Whose turn it is (1 or 2)
 	int totTurns = 0; // Game ends at 9
-	ArrayList<Coordinates> history = new ArrayList<Coordinates>();
+	ArrayList<Integer> history = new ArrayList<Integer>();
 
 	// ****************************
 	// Configuration Variables
@@ -46,16 +46,16 @@ public class TriadBoard {
 
 	// ****************************
 	// The board
-	Slot[][] board = new Slot[3][3];
+	Slot[] board = new Slot[9];
 
 	// Board Indexing
-	/*-----------------------
-	| (0,2) | (1,2) | (2,2) |
-	|-------|-------|-------|
-	| (0,1) | (1,1) | (2,1) |
-	|-------|-------|-------|
-	| (0,0) | (1,0) | (2,0) |
-	|----------------------*/
+	/*-----------
+	| 6 | 7 | 8 |
+	|-------|---|
+	| 3 | 4 | 5 |
+	|-------|---|
+	| 0 | 1 | 2 |
+	|----------*/
 	
 
 
@@ -77,10 +77,8 @@ public class TriadBoard {
 			p2Deck[i] = c2;
 		}
 
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				board[i][j] = new Slot(i,j);
-			}
+		for (int i = 0; i < 9; i++) {
+			board[i] = new Slot();
 		}
 
 	}
@@ -89,55 +87,55 @@ public class TriadBoard {
 	// ****************************
 	// Gameplay Methods
 
-	public boolean isValidMove(Card _c, Coordinates _cx) {
+	public boolean isValidMove(Card _c, int _slot) {
 
 
 		// If the slot is already taken
 		// or the card has already been played,
 		// return false
-		return (!(board[_cx.x][_cx.y].hasCard || _c.played));
+		return (!(board[_slot].hasCard || _c.played));
 		
 	}
 
-	public boolean makeMove(Card _c, Coordinates _cx) {
-		if (!isValidMove(_c, _cx)) {
+	public boolean makeMove(Card _c, int _slot) {
+		if (!isValidMove(_c, _slot)) {
 			return false;
 		}
-		history.add(_cx);
+		history.add(_slot);
 
 		// 1. Put card on board
-		board[_cx.x][_cx.y].card = _c;
-		board[_cx.x][_cx.y].hasCard = true;
+		board[_slot].card = _c;
+		board[_slot].hasCard = true;
 
 		_c.player = curPlayer;
 		_c.played = true;
-		_c.cx = _cx;
+		_c.slot = _slot;
 
 		// 2. TODO
 		// Check Element, Plus/Same
 
 		// 3. Flips
-		if (_cx.x > 0 && board[_cx.x-1][_cx.y].hasCard) {
-			if (_c.left > board[_cx.x-1][_cx.y].card.right) {
-				board[_cx.x-1][_cx.y].card.player = curPlayer;
+		if ((_slot % 3) > 0 && board[_slot - 1].hasCard) {
+			if (_c.left > board[_slot - 1].card.right) {
+				board[_slot - 1].card.player = curPlayer;
 			}
 		}
 
-		if (_cx.x < 2 && board[_cx.x+1][_cx.y].hasCard) {
-			if (_c.right > board[_cx.x+1][_cx.y].card.left) {
-				board[_cx.x+1][_cx.y].card.player = curPlayer;
+		if ((_slot % 3) < 2 && board[_slot + 1].hasCard) {
+			if (_c.right > board[_slot + 1].card.left) {
+				board[_slot + 1].card.player = curPlayer;
 			}
 		}
 
-		if (_cx.y > 0 && board[_cx.x][_cx.y-1].hasCard) {
-			if (_c.bottom > board[_cx.x][_cx.y-1].card.top) {
-				board[_cx.x][_cx.y-1].card.player = curPlayer;
+		if ((_slot / 3) > 0 && board[_slot - 3].hasCard) {
+			if (_c.bottom > board[_slot - 3].card.top) {
+				board[_slot - 3].card.player = curPlayer;
 			}
 		}
 
-		if (_cx.y < 2 && board[_cx.x][_cx.y+1].hasCard) {
-			if (_c.top > board[_cx.x][_cx.y+1].card.bottom) {
-				board[_cx.x][_cx.y+1].card.player = curPlayer;
+		if ((_slot / 3) < 2 && board[_slot + 3].hasCard) {
+			if (_c.top > board[_slot + 3].card.bottom) {
+				board[_slot + 3].card.player = curPlayer;
 			}
 		}
 
@@ -165,11 +163,9 @@ public class TriadBoard {
 		}
 
 		int numP1cards = 0;
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (board[i][j].card.player == 1) {
-					numP1cards++;
-				}
+		for (int i = 0; i < 9; i++) {
+			if (board[i].card.player == 1) {
+				numP1cards++;
 			}
 		}
 		if (numP1cards >= 6) {

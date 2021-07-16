@@ -36,9 +36,7 @@ public class HumanPlayer extends TriadPlayer {
 					}
 				}
 
-				Coordinates cx = new Coordinates(getSlot/3, getSlot%3);
-
-				Move mv = new Move(_b.p1Deck[getCard-9], cx);
+				Move mv = new Move(_b.p1Deck[getCard-9], getSlot);
 				return mv;
 				
 
@@ -63,9 +61,7 @@ public class HumanPlayer extends TriadPlayer {
 					}
 				}
 
-				Coordinates cx = new Coordinates(getSlot/3, getSlot%3);
-
-				Move mv = new Move(_b.p2Deck[getCard-14], cx);
+				Move mv = new Move(_b.p2Deck[getCard-14], getSlot);
 				return mv;
 			}
 		}

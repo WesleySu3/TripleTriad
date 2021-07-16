@@ -8,10 +8,6 @@ public class Slot {
 	Color cardRed = new Color(240, 128, 128);
     Color cardBlue = new Color(0, 191, 255);
 
-	// Coordinates
-	int x;
-	int y;
-
 	static Element[] elements = Element.values();
 	Element element;
 	int elementTest;
@@ -23,11 +19,8 @@ public class Slot {
 	Color cardColor;
 
 	// Constructs a Slot
-	// with given coordinates
-	// and random element
-	public Slot(int _x, int _y) {
-		x = _x;
-		y = _y;
+	// with no element
+	public Slot() {
 		hasCard = false;
 		element = Element.SLOTNULL;
 	}

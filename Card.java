@@ -21,7 +21,7 @@ public class Card {
 	// Coordinates on the
 	// playing board.
 	// Default (-1, -1)
-	Coordinates cx;
+	int slot;
 
 	// 1 or 2, the player who
 	// currently owns the card
@@ -46,8 +46,7 @@ public class Card {
 			element = Element.NORMAL;
 		}
 
-		Coordinates xy = new Coordinates();
-		cx = xy;
+		slot = -1;
 	}
 
 	// Randomizes the numbers and element of
