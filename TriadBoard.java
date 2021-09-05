@@ -87,55 +87,86 @@ public class TriadBoard {
 	// ****************************
 	// Gameplay Methods
 
-	public boolean isValidMove(Card _c, int _slot) {
+	// public boolean isValidMove(Card _c, int _slot) {
+	public boolean isValidMove(int _mv) {
 
+		// decode player number
+		int curPlayer = _mv / 100;
 
+		// decode card
+		Card curCard = new Card();
+		if (curPlayer == 1) {
+			curCard = p1Deck[(_mv / 10) % 10];
+		} else {
+			curCard = p2Deck[(_mv / 10) % 10];
+		}
+
+		// decode slot
+		int curSlot = _mv % 10;
+		
 		// If the slot is already taken
 		// or the card has already been played,
 		// return false
-		return (!(board[_slot].hasCard || _c.played));
+		return (!(board[curSlot].hasCard || curCard.played));
+		
 		
 	}
 
-	public boolean makeMove(Card _c, int _slot) {
-		if (!isValidMove(_c, _slot)) {
+	// public boolean makeMove(Card _c, int _slot) {
+	public boolean makeMove(int _mv) {
+
+		// decode player number
+		int curPlayer = _mv / 100;
+
+		// decode card
+		Card curCard = new Card();
+		if (curPlayer == 1) {
+			curCard = p1Deck[(_mv / 10) % 10];
+		} else {
+			curCard = p2Deck[(_mv / 10) % 10];
+		}
+
+		// decode slot
+		int curSlot = _mv % 10;
+
+		if (!isValidMove(_mv)) {
 			return false;
 		}
-		history.add(_slot);
+		history.add(_mv);
 
 		// 1. Put card on board
-		board[_slot].card = _c;
-		board[_slot].hasCard = true;
+		board[curSlot].card = curCard;
+		board[curSlot].hasCard = true;
 
-		_c.player = curPlayer;
-		_c.played = true;
-		_c.slot = _slot;
+		curCard.player = curPlayer;
+		curCard.played = true;
+		curCard.slot = curSlot;
 
 		// 2. TODO
 		// Check Element, Plus/Same
 
 		// 3. Flips
-		if ((_slot % 3) > 0 && board[_slot - 1].hasCard) {
-			if (_c.left > board[_slot - 1].card.right) {
-				board[_slot - 1].card.player = curPlayer;
+		if ((curSlot % 3) > 0 && board[curSlot - 1].hasCard) {
+			if (curCard.left > board[curSlot - 1].card.right) {
+				board[curSlot - 1].card.player = curPlayer;
 			}
 		}
 
-		if ((_slot % 3) < 2 && board[_slot + 1].hasCard) {
-			if (_c.right > board[_slot + 1].card.left) {
-				board[_slot + 1].card.player = curPlayer;
+		if ((curSlot % 3) < 2 && board[curSlot + 1].hasCard) {
+			if (curCard.right > board[curSlot + 1].card.left) {
+				board[curSlot + 1].card.player = curPlayer;
 			}
 		}
 
-		if ((_slot / 3) > 0 && board[_slot - 3].hasCard) {
-			if (_c.bottom > board[_slot - 3].card.top) {
-				board[_slot - 3].card.player = curPlayer;
+		if ((curSlot / 3) > 0 && board[curSlot - 3].hasCard) {
+			if (curCard.bottom > board[curSlot - 3].card.top) {
+				board[curSlot - 3].card.player = curPlayer;
 			}
 		}
 
-		if ((_slot / 3) < 2 && board[_slot + 3].hasCard) {
-			if (_c.top > board[_slot + 3].card.bottom) {
-				board[_slot + 3].card.player = curPlayer;
+		if ((curSlot / 3) < 2 && board[curSlot + 3].hasCard) {
+			if (curCard.top > board[curSlot + 3].card.bottom) {
+				board[curSlot + 3].card.player = curPlayer;
 			}
 		}
 

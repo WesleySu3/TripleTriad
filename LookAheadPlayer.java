@@ -17,9 +17,12 @@ public class LookAheadPlayer extends TriadPlayer {
     	return "Mystery AI";
     }
 
-    public Move decideMove(TriadBoard _b) {
+    public int decideMove(TriadBoard _b) {
 
-    	Move mv = new Move();
+    	int mv = 000;
+
+    	// Heuristics here
+
 		return mv;
 
 	}

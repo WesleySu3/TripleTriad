@@ -13,7 +13,7 @@ public class HumanPlayer extends TriadPlayer {
 		return "Player " + number;
 	}
 
-	public Move decideMove(TriadBoard _b) {
+	public int decideMove(TriadBoard _b) {
 
 		if (this.number == 1) {
 			while (true) {
@@ -36,7 +36,9 @@ public class HumanPlayer extends TriadPlayer {
 					}
 				}
 
-				Move mv = new Move(_b.p1Deck[getCard-9], getSlot);
+				int mv = 100 + ((getCard - 9) * 10) + getSlot;
+				// Move mv = new Move(_b.p1Deck[getCard-9], getSlot);
+				
 				return mv;
 				
 
@@ -61,7 +63,8 @@ public class HumanPlayer extends TriadPlayer {
 					}
 				}
 
-				Move mv = new Move(_b.p2Deck[getCard-14], getSlot);
+				int mv = 200 + ((getCard - 14) * 10) + getSlot;
+				// Move mv = new Move(_b.p2Deck[getCard-14], getSlot);
 				return mv;
 			}
 		}

@@ -2,7 +2,7 @@ abstract class TriadPlayer {
 	
 	abstract String tag();
 
-	abstract Move decideMove(TriadBoard _b);
+	abstract int decideMove(TriadBoard _b);
 
 	Card[] cards = new Card[5];
 

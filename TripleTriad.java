@@ -316,14 +316,20 @@ public class TripleTriad {
 	public static int play(TriadBoard _b, TripleTriadGUI _g,
 		TriadPlayer[] _players) {
 
-		Move curMove;
+		int curMove;
+		int curCard;
+		int curSlot;
 		do {
 			StdDraw.clear();
 			_g.draw(_b, _players[_b.nextTurn()-1]);
 			StdDraw.show();
 			while (true) {
 				curMove = _players[_b.nextTurn()-1].decideMove(_b);
-				_b.makeMove(curMove.card, curMove.slot);
+
+				curCard = (curMove / 10) % 10;
+				curSlot = curMove % 10;
+
+				_b.makeMove(curMove);
 				break;
 			}
 
